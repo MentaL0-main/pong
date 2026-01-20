@@ -4,8 +4,8 @@
 #include <SDL3_ttf/SDL_ttf.h>
 #include <memory>
 
-#include "ball.hpp"
 #include "paddle.hpp"
+#include "ball.hpp"
 #include "delta.hpp"
 
 namespace Pong {

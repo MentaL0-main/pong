@@ -81,7 +81,11 @@ void Pong::mainloop() {
         m_paddle_left->proccess(WINDOW_WIDTH, WINDOW_HEIGHT, SDL_SCANCODE_W, SDL_SCANCODE_S, dt);
         
         if (m_type == 'P') m_paddle_right->proccess(WINDOW_WIDTH, WINDOW_HEIGHT, SDL_SCANCODE_O, SDL_SCANCODE_L, dt);
-        else m_paddle_right->set_y(m_ball->get_y()-30);
+        else { 
+            m_paddle_right->set_y(m_ball->get_y()-30);
+            if (m_paddle_right->get_rect().y < 0) m_paddle_right->set_y(0);
+            else if (m_paddle_right->get_rect().y > WINDOW_HEIGHT-60) m_paddle_right->set_y(WINDOW_HEIGHT-60);
+        }
 
         if (m_ball->get_x() <= 0) {
             m_ball->set(WINDOW_HALF_WIDTH, WINDOW_HALF_HEIGHT, 1); 
