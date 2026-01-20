@@ -13,15 +13,15 @@ void Paddle::render(SDL_Renderer* renderer) {
     SDL_RenderFillRect(renderer, &m_rect);
 }
 
-void Paddle::proccess(int w, int h, SDL_Scancode up, SDL_Scancode down) {
+void Paddle::proccess(int w, int h, SDL_Scancode up, SDL_Scancode down, float dt) {
     const bool* state = SDL_GetKeyboardState(NULL);
 
     if (state[up] && m_rect.y > 0) {
-        m_rect.y -= m_speed;
+        m_rect.y -= m_speed * dt;
     }
 
     if (state[down] && m_rect.y + m_rect.h < h) {
-        m_rect.y += m_speed;
+        m_rect.y += m_speed * dt;
     }
 }
 

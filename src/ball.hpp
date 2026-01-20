@@ -7,9 +7,9 @@ namespace Pong {
 class Ball {
 public:
     Ball(float x, float y, float r);
+
     void render(SDL_Renderer* renderer);
-    void proccess(int w, int h, SDL_FRect left_paddle, SDL_FRect right_paddle);
-    inline void up_speed() { m_speed += 0.1f;};
+    void proccess(int w, int h, SDL_FRect left_paddle, SDL_FRect right_paddle, float dt);
 
     void set(float x, float y, bool side) {
         m_x = x;
@@ -17,7 +17,6 @@ public:
 
         if (side) m_current_dir_x = m_speed; else m_current_dir_x = m_speed;
         if (!side) m_current_dir_x = m_speed; else m_current_dir_x = -m_speed;
-
     }
 
     [[nodiscard]] inline float get_y() const {
@@ -28,11 +27,14 @@ public:
         return m_x;
     }
 
+    inline void up_speed() {
+        m_speed += 0.1f;
+    };
+
 private:
     float m_x, m_y;
     float m_radius;
-
-    float m_speed = 0.1f;
+    float m_speed = 300.0f;
     float m_current_dir_x = -m_speed;
     float m_current_dir_y = m_speed;
 };

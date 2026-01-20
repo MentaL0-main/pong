@@ -6,9 +6,7 @@
 namespace Pong {
 
 Ball::Ball(float x, float y, float r)
-    : m_x(x), m_y(y), m_radius(r) {
-        
-    }
+    : m_x(x), m_y(y), m_radius(r) {}
 
 void Ball::render(SDL_Renderer* renderer) {
     for (int w = 0; w < m_radius * 2; ++w) {
@@ -22,7 +20,7 @@ void Ball::render(SDL_Renderer* renderer) {
     }
 }
 
-void Ball::proccess(int w, int h, SDL_FRect left_paddle, SDL_FRect right_paddle) {
+void Ball::proccess(int w, int h, SDL_FRect left_paddle, SDL_FRect right_paddle, float dt) {
     if (m_x - m_radius <= (left_paddle.x + left_paddle.w) && m_y < left_paddle.y + left_paddle.h && m_y > left_paddle.y) {
         m_current_dir_x = m_speed;
     }
@@ -40,8 +38,8 @@ void Ball::proccess(int w, int h, SDL_FRect left_paddle, SDL_FRect right_paddle)
     
     }
 
-    m_x += m_current_dir_x;
-    m_y -= m_current_dir_y;
+    m_x += m_current_dir_x * dt;
+    m_y -= m_current_dir_y * dt;
 }
 
 }

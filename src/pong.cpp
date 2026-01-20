@@ -1,4 +1,5 @@
 #include "pong.hpp"
+#include "delta.hpp"
 
 #include <memory>
 #include <iostream>
@@ -11,6 +12,7 @@ void Pong::init() {
                  "[*] B - Play with bot, P - Two players mode\n"
                  "[>>] ";
     std::cin >> m_type;
+    m_delta.update();
 
     init_window();
     init_renderer();
@@ -28,7 +30,7 @@ void Pong::init() {
     if (!m_font) {
     m_font = TTF_OpenFont("monojet.ttf", 32);
     if (!m_font) {
-        throw std::runtime_error("Failed to load ANY font");
+        throw std::runtime_error("[!] Failed to load ANY font");
     }
 }
 
@@ -62,11 +64,23 @@ void Pong::mainloop() {
                 m_running = false;
             }
         }
-    
-        m_ball->proccess(WINDOW_WIDTH, WINDOW_HEIGHT, m_paddle_left->get_rect(), m_paddle_right->get_rect());
-        m_paddle_left->proccess(WINDOW_WIDTH, WINDOW_HEIGHT, SDL_SCANCODE_W, SDL_SCANCODE_S);
+
+        m_delta.update();
+        float dt = m_delta.get_delta();
+        float fps = m_delta.get_fps();
+
+        static float timeAccumulator = 0;
+        timeAccumulator += dt;
+        if (timeAccumulator >= 1.0f) {
+            std::string new_title = "Pong (" + std::to_string((int)fps) + ')';
+            SDL_SetWindowTitle(m_window, new_title.c_str());
+            timeAccumulator = 0.0f;
+        }
+
+        m_ball->proccess(WINDOW_WIDTH, WINDOW_HEIGHT, m_paddle_left->get_rect(), m_paddle_right->get_rect(), dt);
+        m_paddle_left->proccess(WINDOW_WIDTH, WINDOW_HEIGHT, SDL_SCANCODE_W, SDL_SCANCODE_S, dt);
         
-        if (m_type == 'P') m_paddle_right->proccess(WINDOW_WIDTH, WINDOW_HEIGHT, SDL_SCANCODE_O, SDL_SCANCODE_L);
+        if (m_type == 'P') m_paddle_right->proccess(WINDOW_WIDTH, WINDOW_HEIGHT, SDL_SCANCODE_O, SDL_SCANCODE_L, dt);
         else m_paddle_right->set_y(m_ball->get_y()-30);
 
         if (m_ball->get_x() <= 0) {

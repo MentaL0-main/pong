@@ -9,7 +9,7 @@ public:
     Paddle(int x, int y, int width, int height);
 
     void render(SDL_Renderer* renderer);
-    void proccess(int w, int h, SDL_Scancode up, SDL_Scancode down);
+    void proccess(int w, int h, SDL_Scancode up, SDL_Scancode down, float dt);
 
     [[nodiscard]] inline SDL_FRect get_rect() const {
         return m_rect;
@@ -20,7 +20,7 @@ public:
     }
 
 private:
-    float m_speed = 0.5f;
+    float m_speed = 300.0f;
     SDL_FRect m_rect;
 };
 

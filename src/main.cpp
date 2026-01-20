@@ -1,7 +1,7 @@
 #include "pong.hpp"
 
 #include <iostream>
-#include <exception>
+#include <stdexcept>
 #include <memory>
 
 int main() {

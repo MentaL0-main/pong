@@ -6,6 +6,7 @@
 
 #include "ball.hpp"
 #include "paddle.hpp"
+#include "delta.hpp"
 
 namespace Pong {
 
@@ -21,15 +22,13 @@ public:
 private:
     SDL_Window* m_window;
     SDL_Renderer* m_renderer;
-
     SDL_Event m_event;
-
     SDL_Color m_background_color = {0, 0, 0, 255};
     SDL_Color m_foreground_color = {255, 255, 255, 255};
 
     bool m_running = true;
-    
     char m_type;
+    Delta m_delta;
 
     std::unique_ptr<Ball> m_ball;
     std::unique_ptr<Paddle> m_paddle_left;
