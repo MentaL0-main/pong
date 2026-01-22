@@ -67,15 +67,6 @@ void Pong::mainloop() {
 
         m_delta.update();
         float dt = m_delta.get_delta();
-        float fps = m_delta.get_fps();
-
-        static float timeAccumulator = 0;
-        timeAccumulator += dt;
-        if (timeAccumulator >= 1.0f) {
-            std::string new_title = "Pong (" + std::to_string((int)fps) + ')';
-            SDL_SetWindowTitle(m_window, new_title.c_str());
-            timeAccumulator = 0.0f;
-        }
 
         m_ball->proccess(WINDOW_WIDTH, WINDOW_HEIGHT, m_paddle_left->get_rect(), m_paddle_right->get_rect(), dt);
         m_paddle_left->proccess(WINDOW_WIDTH, WINDOW_HEIGHT, SDL_SCANCODE_W, SDL_SCANCODE_S, dt);
@@ -116,6 +107,8 @@ void Pong::mainloop() {
 
         SDL_RenderPresent(m_renderer);
 
+
+        SDL_Delay(1);
     }
 }
 
