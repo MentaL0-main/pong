@@ -1,7 +1,7 @@
 # Pong  
 *Simple C++/SDL3 implementation of classic Pong with an unbeatable bot. *
 
-> ! [Screenshot](screenshots/screenshot.png)
+> ![Screenshot](screenshots/screenshot.png)
 
 ---
 
