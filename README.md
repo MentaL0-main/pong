@@ -1,5 +1,5 @@
 # Pong  
-*Simple C++/SDL3 implementation of classic Pong with an unbeatable bot. *
+**Simple C++/SDL3 implementation of classic Pong with an unbeatable bot.**
 
 > ![Screenshot](screenshots/screenshot.png)
 
@@ -36,12 +36,15 @@
 - Make
 - git
 
-`bash
+```bash
 git clone https://github.com/mental0-main/pong.git
 cd pong
 mkdir build && cd build
 cmake .. && make -j3
 cp .. /assets/fonts/monojet.ttf .
 ./pong
-`
+```
+
+## Lincense
+This project use MIT license
 
