@@ -12,7 +12,7 @@
 
 ## Features
 
--Classic Pong: ball, two rackets, score.
+- Classic Pong: ball, two rackets, score.
 - "Dishonest" bot: the bat racket is always at ball level on the Y-axis.  
 - Text rendering via SDL3_ttf.
 
